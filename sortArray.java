@@ -32,7 +32,7 @@ class sortArray
         }
         sortArray call = new sortArray(size);
 
-        System.out.println("\nEnter " +size +" elements within the range 0 to 1000:");
+        System.out.println("\nEnter " +size +" integers with values within the range 0 to 1000:");
         call.readArray();
         System.out.println("Choose Sorting Technique :\n");
         System.out.println("1 : Selection Sort");
@@ -223,18 +223,17 @@ class sortArray
         boolean sorted = false;
         int expo = 1;
 
-        while ( ! sorted) {
+        while ( ! sorted) 
+        {
             sorted = true;
-
-            for (int item : a) {
+            for (int item : a) 
+            {
                 int bucket = (item / expo) % 10;
                 if (bucket > 0) sorted = false;
                 bins[bucket].add(item);
             }
-
             expo *= 10;
             int index = 0;
-
             for (Queue<Integer> bucket : bins)
             {
                 while ( ! bucket.isEmpty())
@@ -243,11 +242,8 @@ class sortArray
                 }
             }
         }
-
         assert isSorted(a);
-
     }
-
     public boolean isSorted(int[] a)
     {
         for (int i = 1; i < a.length; i++)
@@ -258,19 +254,25 @@ class sortArray
             }
         }
         return true;
-
     }
-    //When I wrote this, only God and I understood what I was doing.
-    //Now, God only knows.
+    
     public void display()
     {
         System.out.println("\nSorted Array :");
-        System.out.print("["+ a[0] + ", ");
-        for(int i=1;i<n-1;i++)
-        {    
-            System.out.print(a[i] + ", ");
+        if(n==1)
+        {
+            System.out.print("["+ a[0] + "]");
         }
-        System.out.print(a[n-1]+"]");
+        else
+        {
+            System.out.print("["+ a[0] + ", ");
+            for(int i=1;i<n-1;i++)
+            {    
+                System.out.print(a[i] + ", ");
+            }
+            System.out.print(a[n-1]+"]");
+        }
     }
-
 }
+//When I wrote this, only God and I understood what I was doing.
+    //Now, God only know.
