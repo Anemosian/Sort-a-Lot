@@ -238,18 +238,18 @@ class sortMatic
             bins[i] = new LinkedList<Integer>();
         }
         boolean sorted = false;
-        int expo = 1;
+        int deciPlace = 1;
 
         while ( ! sorted) 
         {
             sorted = true;
             for (int item : a) 
             {
-                int bucket = (item / expo) % 10;
+                int bucket = (item / deciPlace) % 10;
                 if (bucket > 0) sorted = false;
                 bins[bucket].add(item);
             }
-            expo *= 10;
+            deciPlace *= 10;
             int index = 0;
             for (Queue<Integer> bucket : bins)
             {
