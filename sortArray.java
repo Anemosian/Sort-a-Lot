@@ -42,9 +42,15 @@ class sortArray
         System.out.println("5 : Quick Sort");
         System.out.println("6 : Bucket Sort");
         System.out.println("7 : Radix Sort");
+        System.out.println("8 : Exit");
         System.out.print("\nYour Choice : ");
         int method = Integer.parseInt(br.readLine());
-
+        while(method > 7 || method < 1)
+        {
+        System.out.println("\nInvalid Choice ! Please choose again.");
+        System.out.print("\nYour Choice : ");
+        method = Integer.parseInt(br.readLine());
+        }
         switch(method)
         {
             case 1:
@@ -54,7 +60,7 @@ class sortArray
             call.bubbleSort();
             break;
             case 3:
-            call.insertionSort2();
+            call.insertionSort();
             break;
             case 4:
             call.mergeSort();
@@ -68,10 +74,13 @@ class sortArray
             case 7:
             call.radixSort();
             break;
+            case 8:
+            System.out.println("\nThank you for using the All-In-One Sortmatic Machine.");
+            System.exit(1);
+            break;
             default :
             System.out.println("\nInvalid Choice !");
-            System.out.print("\nYour Choice : ");
-            method = Integer.parseInt(br.readLine());
+            System.exit(1);
             break;
         }
         call.display();
@@ -151,10 +160,14 @@ class sortArray
         }
     }
     
-    
-
     public void mergeSort()
     {
+        
+        
+        
+        
+        
+        
     }
 
     public void quickSort(int low, int high)
@@ -265,6 +278,7 @@ class sortArray
         if(n==1)
         {
             System.out.print("["+ a[0] + "]");
+            System.out.println("\nThank you for using the All-In-One Sortmatic Machine.");
         }
         else
         {
@@ -274,6 +288,7 @@ class sortArray
                 System.out.print(a[i] + ", ");
             }
             System.out.print(a[n-1]+"]");
+            System.out.println("\nThank you for using the All-In-One Sortmatic Machine.");
         }
     }
 }
