@@ -26,8 +26,8 @@ class sortArray
         int size = Integer.parseInt(br.readLine());
         while(size > 16 || size < 1)
         {
-            System.out.print("Invalid input. Please enter a value from 1 to 16.");
-            System.out.print("Enter the size of the array : ");
+            System.out.println("Invalid input. Please enter a value from 1 to 16.");
+            System.out.println("Enter the size of the array : ");
             size = Integer.parseInt(br.readLine());
         }
         sortArray call = new sortArray(size);
@@ -54,7 +54,7 @@ class sortArray
             call.bubbleSort();
             break;
             case 3:
-            call.insertionSort();
+            call.insertionSort2();
             break;
             case 4:
             call.mergeSort();
@@ -70,7 +70,8 @@ class sortArray
             break;
             default :
             System.out.println("\nInvalid Choice !");
-            System.exit(1);
+            System.out.print("\nYour Choice : ");
+            method = Integer.parseInt(br.readLine());
             break;
         }
         call.display();
@@ -125,9 +126,9 @@ class sortArray
             {
                 if(a[j] > a[j+1])
                 {
-                    temp = a[j];
-                    a[j] = a[j+1];
-                    a[j+1] = temp;
+                    temp = a[j+1];
+                    a[j+1] = a[j];
+                    a[j] = temp;
                 }
             }
         }
@@ -136,19 +137,21 @@ class sortArray
     public void insertionSort()
     {
         int temp;
-        for(int i = 1; i < n ;i++)
+        int i;
+        for(int j = 1; j < n ;j++)
         {
-            for(int j = i ; j > 0 ; j--) 
+            temp = a[j];
+            i = j;
+            while(i > 0 && a[i-1]>temp)
             {
-                if(a[j] < a[j-1]) 
-                {
-                    temp = a[j];
-                    a[j] = a[j-1];
-                    a[j-1] = temp;
-                }
+                a[i] = a[i-1];
+                i-=1;
             }
+            a[i]=temp;
         }
     }
+    
+    
 
     public void mergeSort()
     {
