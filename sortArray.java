@@ -7,12 +7,6 @@ class sortMatic
     int n;
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public sortMatic(int size) // Constructor
-    {
-        a = new int[size];
-        n = size;
-    }
-
     public static void main(String args[]) throws IOException
     {
         System.out.println("Introducing, the All-In-One Sortmatic Machine!");
@@ -30,10 +24,10 @@ class sortMatic
             System.out.println("Enter the size of the array : ");
             size = Integer.parseInt(br.readLine());
         }
-        sortMatic call = new sortMatic(size);
+        int[] call = new int[size];
 
         System.out.println("\nEnter " +size +" integers with values within the range 0 to 1000:");
-        call.readArray();
+        readArray(call);
         System.out.println("Choose Sorting Technique :\n");
         System.out.println("1 : Selection Sort");
         System.out.println("2 : Bubble Sort");
@@ -44,35 +38,36 @@ class sortMatic
         System.out.println("7 : Radix Sort");
         System.out.println("8 : Exit");
         System.out.print("\nYour Choice : ");
+
         int method = Integer.parseInt(br.readLine());
         while(method > 7 || method < 1)
         {
-        System.out.println("\nInvalid Choice ! Please choose again.");
-        System.out.print("\nYour Choice : ");
-        method = Integer.parseInt(br.readLine());
+            System.out.println("\nInvalid Choice ! Please choose again.");
+            System.out.print("\nYour Choice : ");
+            method = Integer.parseInt(br.readLine());
         }
         switch(method)
         {
             case 1:
-            call.selectionSort();
+            selectionSort(call);
             break;
             case 2:
-            call.bubbleSort();
+            bubbleSort(call);
             break;
             case 3:
-            call.insertionSort();
+            insertionSort(call);
             break;
             case 4:
-            call.mergeSort();
+            mergeSort(call);
             break;
             case 5:
-            call.quickSort(0, size-1);
+            quickSort(call, 0, size-1);
             break;
             case 6:
-            call.bucketSort();
+            bucketSort(call);
             break;
             case 7:
-            call.radixSort();
+            radixSort(call);
             break;
             case 8:
             System.out.println("\nThank you for using the All-In-One Sortmatic Machine.");
@@ -83,13 +78,14 @@ class sortMatic
             System.exit(1);
             break;
         }
-        call.display();
+        display(call);
     }
 
-    public void readArray() throws IOException
+    public static void readArray(int[] a) throws IOException
     {
         int input;
-        for(int i = 0;i < n; i++)
+        int n = a.length;
+        for(int i = 0; i < n; i++)
         {
             input = Integer.parseInt(br.readLine());
             while( input < 0 || input > 1000 )
@@ -100,14 +96,14 @@ class sortMatic
                 input = Integer.parseInt(br.readLine());
             } 
             a[i] = input;
-            System.out.println("\nPlease enter " + (n-i) + " more numbers");
         }
     }
 
-    public void selectionSort()
+    public static void selectionSort(int[] a)
     {
         int temp; 
         int min;
+        int n = a.length;
         for(int i=0;i<n-1;i++)
         {
             min = i;
@@ -127,9 +123,10 @@ class sortMatic
         }
     }
 
-    public void bubbleSort()
+    public static void bubbleSort(int[] a)
     {
         int temp;
+        int n = a.length;
         for(int i = 0; i < n-1; i++)
         {
             for(int j = 0; j < n-1-i ; j++)
@@ -144,10 +141,11 @@ class sortMatic
         }
     }
 
-    public void insertionSort()
+    public static void insertionSort(int[] a)
     {
         int temp;
         int i;
+        int n = a.length;
         for(int j = 1; j < n ;j++)
         {
             temp = a[j];
@@ -160,22 +158,40 @@ class sortMatic
             a[i]=temp;
         }
     }
-    
-    public void mergeSort()
+
+    public static void mergeSort(int[] a) 
     {
-        
-        
-        
-        
-        
-        
+        int n = a.length;
+        if (n >= 2) {
+            // split array in half
+            int[] left  = Arrays.copyOfRange(a, 0, a.length / 2);
+            int[] right = Arrays.copyOfRange(a, a.length / 2, a.length);
+
+            // sort the halves
+            mergeSort(left);
+            mergeSort(right);
+
+            // merge them back together
+            int i1 = 0;
+            int i2 = 0;
+            for (int i = 0; i < n; i++) {
+                if (i2 >= right.length ||
+                (i1 < left.length && left[i1] < right[i2])) {
+                    a[i] = left[i1];
+                    i1++;
+                } else {
+                    a[i] = right[i2];
+                    i2++;
+                }
+            }
+        }
     }
 
-    public void quickSort(int low, int high)
+    public static void quickSort(int[] a, int low, int high)
     {
         int i = low; 
         int j = high;
-    
+        int n = a.length;
         if(high - low >= 1)
         {
             int pivot = a[low];
@@ -195,8 +211,8 @@ class sortMatic
                 }
             }
             exchangeNumbers(a, low, j);
-            quickSort(low, j-1);
-            quickSort(j+1, high);
+            quickSort(a, low, j-1);
+            quickSort(a, j+1, high);
         }
         else
         {
@@ -204,7 +220,7 @@ class sortMatic
         } 
     }
 
-    private void exchangeNumbers(int a[], int i, int j) 
+    private static void exchangeNumbers(int a[], int i, int j) 
     {
         int temp ;
         temp = a[i]; 
@@ -212,9 +228,10 @@ class sortMatic
         a[j] = temp; 
     }
 
-    public void bucketSort()
+    public static void bucketSort(int[] a)
     {
         int[] bins = new int[1001];
+        int n = a.length;
         for (int i = 0; i < n ; i++)
         {
             bins[a[i]]++;
@@ -229,9 +246,10 @@ class sortMatic
         }
         return;
     }
-    
-    public void radixSort()
+
+    public static void radixSort(int[] a)
     {
+        int n = a.length;
         Queue<Integer>[] bins = new Queue[10];
         for (int i = 0; i < 10; i++)
         {
@@ -261,9 +279,11 @@ class sortMatic
         }
         assert isSorted(a);
     }
-    public boolean isSorted(int[] a)
+
+    public static boolean isSorted(int[] a)
     {
-        for (int i = 1; i < a.length; i++)
+        int n = a.length;
+        for (int i = 1; i < n; i++)
         {
             if (a[i - 1] > a[i])
             {
@@ -272,9 +292,10 @@ class sortMatic
         }
         return true;
     }
-    
-    public void display()
+
+    public static void display(int[] a)
     {
+        int n = a.length;
         System.out.println("\nSorted Array :");
         if(n==1)
         {
@@ -294,4 +315,4 @@ class sortMatic
     }
 }
 //When I wrote this, only God and I understood what I was doing.
-    //Now, God only know.
+//Now, God only know.
