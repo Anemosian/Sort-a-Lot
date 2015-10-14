@@ -1,13 +1,13 @@
 import java.io.*;
 import java.util.*;
 
-class sortArray
+class sortMatic
 {
     int a[];
     int n;
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public sortArray(int size) // Constructor
+    public sortMatic(int size) // Constructor
     {
         a = new int[size];
         n = size;
@@ -20,7 +20,7 @@ class sortArray
         System.out.println("It merge-sorts!");
         System.out.println("It even bucket-sorts!");
         //System.out.println("It even shows you all the results in a step-by-step manner with a handy,dandy user interface!");
-        System.out.println("All for one amazing price of 80.95!");
+        System.out.println("All for one amazing price of 74.95!");
 
         System.out.println("Enter the size of the array : ");
         int size = Integer.parseInt(br.readLine());
@@ -30,7 +30,7 @@ class sortArray
             System.out.println("Enter the size of the array : ");
             size = Integer.parseInt(br.readLine());
         }
-        sortArray call = new sortArray(size);
+        sortMatic call = new sortMatic(size);
 
         System.out.println("\nEnter " +size +" integers with values within the range 0 to 1000:");
         call.readArray();
@@ -100,6 +100,7 @@ class sortArray
                 input = Integer.parseInt(br.readLine());
             } 
             a[i] = input;
+            System.out.println("\nPlease enter " + (n-i) + " more numbers");
         }
     }
 
@@ -174,7 +175,7 @@ class sortArray
     {
         int i = low; 
         int j = high;
-
+    
         if(high - low >= 1)
         {
             int pivot = a[low];
@@ -228,7 +229,7 @@ class sortArray
         }
         return;
     }
-
+    
     public void radixSort()
     {
         Queue<Integer>[] bins = new Queue[10];
